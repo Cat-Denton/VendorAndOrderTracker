@@ -29,8 +29,26 @@ namespace VendorAndOrderTracker.Controllers
     [HttpGet("/vendors/{id}")]
     public ActionResult Show(int id)
     {
+      Dictionary<string,object> model = new Dictionary<string,object>();
       Vendor foundVendor = Vendor.Find(id);
-      return View(foundVendor);
+      List<Order> vendorOrders = foundVendor.Orders;
+      model.Add("vendor", foundVendor);
+      model.Add("orders", vendorOrders);
+      model.Add("vendorName",foundVendor.Name);
+      return View(model);
+    }
+
+    [HttpPost("/vendors/{vendorId}/items")]
+    public ActionResult Create(int vendorId, string orderTitle, string orderDescript, int orderPrice, string orderDate)
+    {
+      Dictionary<string,object> model = new Dictionary<string,object>();
+      Vendor foundVendor = Vendor.Find(vendorId);
+      Order newOrder = new Order(orderTitle,orderDescript,orderPrice,orderDate);
+      foundVendor.AddOrder(newOrder);
+      List<Order> vendorOrders = foundVendor.Orders;
+      model.Add("orders", vendorOrders);
+      model.Add("vendor", foundVendor);
+      return View("Show", model);
     }
   }
 }

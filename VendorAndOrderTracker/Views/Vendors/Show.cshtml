@@ -1,11 +1,12 @@
 <h1>Vendor Details:</h1>
 
-<h2>Vendor Name: @Model.Name</h2>
-<h2>Vendor Description: @Model.Description</h2>
-@if(Model.Orders.Count == 0)
+<h2>Vendor Name: @Model["vendorName"]</h2>
+@* <h2>Vendor Description: @Model.Description</h2> *@
+@* @if(Model.Orders.Count == 0)
 {
   <p>This Vendor has no orders</p>
 }
-
-
+<br> *@
+<a href="/vendors/@Model["vendor"].Id/orders/new">Enter a new order</a>
+<br>
 <a href="/vendors">Return to Vendor list</a>
