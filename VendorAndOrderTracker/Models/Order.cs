@@ -20,6 +20,7 @@ namespace VendorAndOrderTracker.Models
       Date = date;
       _instances.Add(this);
       Id = _instances.Count;
+      IsClosed = false;
     }
     public static void ClearAll()
     {
